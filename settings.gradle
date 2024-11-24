@@ -14,3 +14,5 @@ dependencyResolutionManagement {
 }
 rootProject.name = "DropCapture"
 include ':app'
+
+include ':opencv'

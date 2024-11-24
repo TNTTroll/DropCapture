@@ -49,6 +49,7 @@ public class Threading {
                 BTConnection.start();
 
                 SendCode.hello();
+                Log.e("SEND", "Done");
             }
         }
 

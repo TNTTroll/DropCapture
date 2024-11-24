@@ -7,36 +7,39 @@
     android:background="@drawable/round"
     tools:context=".Display">
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
+    <ImageView
+        android:id="@+id/displayMask"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="400dp"
 
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginTop="68dp"
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
 
-        android:orientation="vertical"
+        android:background="#000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/displayBtn"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+
+        android:layout_marginBottom="68dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+
+        android:backgroundTint="@color/button"
+        android:gravity="center"
+        android:text="Сделать фото"
+        android:textColor="@color/text"
+
+        android:textSize="20dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/displayPhoto"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight=".5"
-            android:src="@android:drawable/arrow_up_float" />
-
-        <ImageView
-            android:id="@+id/displayMask"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight=".5"
-            android:src="@android:drawable/arrow_down_float" />
-    </LinearLayout>
-
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

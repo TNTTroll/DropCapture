@@ -1,12 +1,26 @@
 package com.example.dropcapture;
 
+import static com.example.dropcapture.MainActivity.getResId;
+
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
+import org.opencv.android.OpenCVLoader;
+import org.opencv.core.Mat;
+import org.opencv.android.Utils;
+import org.opencv.core.Mat;
+import org.opencv.imgproc.Imgproc;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 
 public class Display extends Fragment {
 
@@ -17,6 +31,7 @@ public class Display extends Fragment {
     private String mParam2;
 
     View view;
+    ImageView mask;
 
     public Display() {
     }
@@ -45,6 +60,27 @@ public class Display extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_display, container, false);
 
+        mask = view.findViewById(R.id.displayMask);
+
+        Button btn = view.findViewById(R.id.displayBtn);
+        btn.setOnClickListener(v -> SendCode.setPhoto());
+
+        if (OpenCVLoader.initDebug())
+            makeMask("connect");
+
         return view;
+    }
+
+    public void makeMask(String photo) {
+        BitmapDrawable picture = (BitmapDrawable) ResourcesCompat.getDrawable(getResources(), getResId(photo, R.drawable.class), null);
+        Bitmap bitmap = picture.getBitmap();
+
+        Mat mat = new Mat();
+        Utils.bitmapToMat(bitmap, mat);
+
+        Imgproc.cvtColor(mat, mat, Imgproc.COLOR_RGB2GRAY);
+        Utils.matToBitmap(mat, bitmap);
+
+        mask.setImageBitmap(bitmap);
     }
 }

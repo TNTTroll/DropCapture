@@ -23,6 +23,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import org.opencv.android.OpenCVLoader;
+
 import java.lang.reflect.Field;
 
 public class MainActivity extends AppCompatActivity {
@@ -77,6 +79,11 @@ public class MainActivity extends AppCompatActivity {
         ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) screen.getLayoutParams();
         layoutParams.height = (int)(displayMetrics.heightPixels*.75);
         screen.setLayoutParams(layoutParams);
+
+        if(OpenCVLoader.initDebug())
+            Log.d("Check", "OpenCv configured successfully");
+        else
+            Log.d("Check", "OpenCv doesn’t configured successfully");
     }
 
 

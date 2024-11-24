@@ -7,7 +7,7 @@ import android.util.Log;
 
 public class SendCode {
     public static void brightness() {
-        Log.e("BT", "Свет на " + (brightness+"").getBytes());
+        Log.e("BT", "Свет на " + brightness);
 
         if (BTConnection != null) {
             byte[] bytesToSend = (brightness+"").getBytes();
