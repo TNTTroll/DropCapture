@@ -3,6 +3,7 @@ package com.example.dropcapture;
 import static com.example.dropcapture.MainActivity.BTConnection;
 import static com.example.dropcapture.MainActivity.detectorToggle;
 import static com.example.dropcapture.MainActivity.getResId;
+import static com.example.dropcapture.MainActivity.toast;
 
 import android.os.Bundle;
 

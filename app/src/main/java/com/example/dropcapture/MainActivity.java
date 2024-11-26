@@ -17,7 +17,6 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -35,13 +34,8 @@ public class MainActivity extends AppCompatActivity {
     Button connect, display;
     public static View screen;
 
-    public static int brightness = 0;
+    public static int brightness = 1;
     public static boolean detectorToggle = true;
-
-    // Slide menu
-    static final int MIN_DISTANCE = 400;
-    private boolean userMode = true;
-    private float x1;
 
     //Bluetooth
     public static BluetoothAdapter mBluetoothAdapter;
@@ -74,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
         display = (Button) findViewById(R.id.menuDisplay);
         display.setOnClickListener(v ->
-                getSupportFragmentManager().beginTransaction().replace(screen.getId(), new Display()).commit());
+                getSupportFragmentManager().beginTransaction().replace(screen.getId(), new Debug()).commit());
 
         ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) screen.getLayoutParams();
         layoutParams.height = (int)(displayMetrics.heightPixels*.75);
@@ -83,43 +77,9 @@ public class MainActivity extends AppCompatActivity {
         if(OpenCVLoader.initDebug())
             Log.d("Check", "OpenCv configured successfully");
         else
-            Log.d("Check", "OpenCv doesn’t configured successfully");
+            Log.d("Check", "OpenCv does not configured successfully");
     }
 
-
-    // Slide menu
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        switch(event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                x1 = event.getX();
-                break;
-
-            case MotionEvent.ACTION_UP:
-                float x2 = event.getX();
-                float deltaX = x2 - x1;
-
-                if ( Math.abs(deltaX) > MIN_DISTANCE )
-                    if (x1 > x2 && !userMode) {
-                        getSupportFragmentManager().beginTransaction().replace(screen.getId(), new Connect()).commit();
-                        toast("Режим: Пользователь");
-                        userMode = true;
-                    } else if (x1 < x2 && userMode) {
-                        getSupportFragmentManager().beginTransaction().replace(screen.getId(), new Debug()).commit();
-                        toast("Режим: Разработчик");
-                        userMode = false;
-                    }
-                break;
-        }
-
-        return super.onTouchEvent(event);
-    }
-
-
-    // Bluetooth functions
-    public static void getPhoto(int[] string) {
-        Log.e("PHOTO", string[0] + "");
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

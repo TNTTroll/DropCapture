@@ -69,7 +69,7 @@ public class Search extends Fragment {
 
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
             for (BluetoothDevice device : devices)
-                if (device.getName().equals("BT_Detector"))
+                if (device.getName().startsWith("BT_Detector"))
                     transaction.add(R.id.searchList, new Plate( device ));
 
             transaction.addToBackStack(null);
